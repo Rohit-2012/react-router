@@ -6,16 +6,18 @@ import Footer from "./components/footer/Footer";
 import Vans from "./pages/vans/Vans";
 import VansDetail from "./pages/vanDetail/VanDetail";
 import "../server";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navigation />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/vans" element={<Vans />} />
-        <Route path="/vans/:id" element={<VansDetail />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/vans" element={<Vans />} />
+          <Route path="/vans/:id" element={<VansDetail />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>
