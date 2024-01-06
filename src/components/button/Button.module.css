@@ -1,0 +1,19 @@
+.main_button {
+    width: 30rem;
+    height: 3rem;
+    color: white;
+    border-radius: 0.3125rem;
+    border: none;
+   font-family: 'Inter', sans-serif;
+   font-weight: bold;
+   letter-spacing: 0.1rem;
+   font-size: 1rem;
+   cursor: pointer;
+   width: 100%;
+}
+
+@media (max-width: 500px) {
+    .main_button {
+        width: 90%;
+    }
+}

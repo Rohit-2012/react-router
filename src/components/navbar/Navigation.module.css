@@ -1,0 +1,29 @@
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #FFF7ED;
+    position: sticky;
+    top: 0;
+    right: 0;
+}
+
+.nav_container > a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+nav > a {
+    color: #4D4D4D;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+}
