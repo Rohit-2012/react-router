@@ -5,24 +5,24 @@ import navstyle from "./Navigation.module.css";
 const Navigation = () => {
   return (
     <header className={navstyle.nav_container}>
-      <NavLink to="/">
-        <h1>#VANLIFE</h1>
+      <NavLink to=".">
+        <h1 className={navstyle.logo}>#VANLIFE</h1>
       </NavLink>
       <nav>
         <NavLink
-          to="/host"
+          to="host"
           className={({ isActive }) => (isActive ? navstyle.active_link : null)}
         >
           Host
         </NavLink>
         <NavLink
-          to="/about"
+          to="about"
           className={({ isActive }) => (isActive ? navstyle.active_link : null)}
         >
           About
         </NavLink>
         <NavLink
-          to="/vans"
+          to="vans"
           className={({ isActive }) => (isActive ? navstyle.active_link : null)}
         >
           Vans
