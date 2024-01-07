@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./HostvanDetails.module.css";
+import styles from "./HostVanDetails.module.css";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 
 const HostVanDetails = () => {

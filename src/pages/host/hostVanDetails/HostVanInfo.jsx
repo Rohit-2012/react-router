@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import styles from "./HostvanDetails.module.css";
+import styles from "./HostVanDetails.module.css";
 
 
 const HostVanInfo = () => {
