@@ -1,0 +1,32 @@
+.host_vansList_container {
+    padding: 1rem 2rem;
+}
+
+.host_vansList_container h2 {
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vans_container {
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.vans_container a {
+    text-decoration: none;
+    color: #000;
+}
+
+.hostVan {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hostVan img {
+    width: 5rem;
+    border-radius: 0.3rem;
+}

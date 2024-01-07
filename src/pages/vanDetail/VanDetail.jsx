@@ -15,7 +15,7 @@ const VanDetail = () => {
 
   return (
       <section className={style.van_details_container}>
-          <span className={style.link}> &larr; <Link to='/vans'>Back to all vans</Link></span>
+          <span className={style.link}> &larr; <Link to='..' relative='path'>Back to all vans</Link></span>
           {van ? (
               <div className={style.van_detail}>
               <img src={van.imageUrl} alt={van.name} />
