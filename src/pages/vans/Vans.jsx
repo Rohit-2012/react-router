@@ -54,19 +54,19 @@ const Vans = () => {
 
         {/* Using setSearchParams function for adding new search parameters instead of Link component */}
         <button
-          onClick={() => setSearchParams({ type: "simple" })}
+          onClick={() => setSearchParams({ type: "simple" })} //passing object as search parameters
           className={`${styles.simple} ${styles.btn}`}
         >
           Simple
         </button>
         <button
-          onClick={() => setSearchParams({ type: "luxury" })}
+          onClick={() => setSearchParams("type=luxury")} //passing string without "?" as search parameters
           className={`${styles.luxury} ${styles.btn}`}
         >
           Luxury
         </button>
         <button
-          onClick={() => setSearchParams({ type: "rugged" })}
+          onClick={() => setSearchParams("?type=rugged")} //passing string without "?" as search parameters
           className={`${styles.rugged} ${styles.btn}`}
         >
           Rugged
