@@ -1,32 +1,40 @@
 import { useState } from "react";
 import styles from "./Vans.module.css";
 import { useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
 
+export function loader() {
+  return getVans()
+}
+
 const Vans = () => {
-  const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [vans, setVans] = useState([]);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get("type");
 
-  useEffect(() => {
-    fetch("/api/vans");
-    const loadVans = async () => {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVans(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Using useLoaderData instead of useEffect
 
-    loadVans();
-  }, []);
+  const vans = useLoaderData()
+
+  // useEffect(() => {
+  //   fetch("/api/vans");
+  //   const loadVans = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const data = await getVans();
+  //       setVans(data);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   loadVans();
+  // }, []);
 
   const generateNewSearchParams = (key, value) => {
     const sp = new URLSearchParams(searchParams);
@@ -75,9 +83,9 @@ const Vans = () => {
   ));
 
 
-  if (loading) {
-    return <h1 aria-live="polite">Loading...</h1>
-}
+//   if (loading) {
+//     return <h1 aria-live="polite">Loading...</h1>
+// }
 
 if (error) {
     return <h1 aria-live="assertive">There was an error: {error.message}</h1>
