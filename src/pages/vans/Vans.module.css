@@ -47,17 +47,17 @@
   align-items: center;
 }
 
-.simple:hover {
+.simple:hover, .simple.selected {
   color: #fff;
   background-color: #e17654;
 }
 
-.rugged:hover {
+.rugged:hover, .rugged.selected {
   color: #fff;
   background-color: #115e59;
 }
 
-.luxury:hover {
+.luxury:hover, .luxury.selected {
   color: #fff;
   background-color: #161616;
 }

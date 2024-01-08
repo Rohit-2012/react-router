@@ -13,6 +13,27 @@ const Vans = () => {
       .then((res) => res.json())
       .then((data) => setVans(data.vans));
   }, []);
+    
+    const generateNewSearchParams = (key, value) => {
+        const sp = new URLSearchParams(searchParams)
+        if (value === null) {
+            sp.delete(key)
+        } else {
+            sp.set(key, value)
+        }
+        return `?${sp.toString()}`
+    }
+
+    const handleFilterChange = (key, value) => {
+        setSearchParams(prevParams => {
+            if (value === null) {
+                prevParams.delete(key)
+            } else {
+                prevParams.set(key, value)
+            }
+            return prevParams
+        })
+    }
 
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
@@ -20,7 +41,7 @@ const Vans = () => {
 
   const vanElements = filteredVans.map((van) => (
     <div key={van.id} className={styles.van_title}>
-      <Link to={`/vans/${van.id}`}>
+      <Link to={van.id} state={{search: `?${searchParams.toString()}`}}>
         <img src={van.imageUrl} />
         <div className={styles.van_info}>
           <h3>{van.name}</h3>
@@ -51,9 +72,23 @@ const Vans = () => {
         <Link to="." className={styles.clear}>
           Clear filters
         </Link> */}
+              
+        {/* Mergin search params with Link */}
+        {/* <Link to={generateNewSearchParams("type", "simple")} className={`${styles.simple} ${styles.tag}`}>
+          Simple
+        </Link>
+        <Link to={generateNewSearchParams("type", "luxury")} className={`${styles.luxury} ${styles.tag}`}>
+          Luxury
+        </Link>
+        <Link to={generateNewSearchParams("type", "rugged")} className={`${styles.rugged} ${styles.tag}`}>
+          Rugged
+        </Link>
+        <Link to={generateNewSearchParams("type", null)} className={styles.clear}>
+          Clear filters
+        </Link> */}
 
         {/* Using setSearchParams function for adding new search parameters instead of Link component */}
-        <button
+        {/* <button
           onClick={() => setSearchParams({ type: "simple" })} //passing object as search parameters
           className={`${styles.simple} ${styles.btn}`}
         >
@@ -76,7 +111,33 @@ const Vans = () => {
           className={styles.clear}
         >
           Clear filters
+        </button> */}
+              
+        {/* Mering search params with setSearchParams function */}
+        <button
+          onClick={() => handleFilterChange("type", "simple")} //passing object as search parameters
+          className={`${styles.simple} ${styles.btn} ${typeFilter === 'simple' ? styles.selected : null}`}
+        >
+          Simple
         </button>
+        <button
+          onClick={() => handleFilterChange("type", "luxury")} //passing string without "?" as search parameters
+          className={`${styles.luxury} ${styles.btn} ${typeFilter === 'luxury' ? styles.selected : null}`}
+        >
+          Luxury
+        </button>
+        <button
+          onClick={() => handleFilterChange("type", "rugged")} //passing string without "?" as search parameters
+          className={`${styles.rugged} ${styles.btn} ${typeFilter === 'rugged' ? styles.selected : null}`}
+        >
+          Rugged
+        </button>
+        {typeFilter && <button
+          onClick={() => handleFilterChange("type", null)}
+          className={styles.clear}
+        >
+          Clear filters
+        </button>}
       </div>
       <div className={styles.van_list}>{vanElements}</div>
     </section>
