@@ -20,13 +20,37 @@
   flex-wrap: wrap;
 }
 
+.tags a {
+  color: #161616;
+}
+
 .tag {
+  text-decoration: none;
   border-radius: 0.3125rem;
   background: #ffead0;
   padding: 0.3rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.simple:hover {
+  color: #fff;
+  background-color: #E17654;
+}
+
+.rugged:hover{
+  color: #fff;
+  background-color: #115E59;
+}
+
+.luxury:hover {
+  color: #fff;
+  background-color: #161616;
+}
+
+.clear {
+  background: transparent;
 }
 
 .van_list {
