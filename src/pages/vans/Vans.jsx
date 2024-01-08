@@ -6,39 +6,48 @@ import { getVans } from "../../api";
 
 const Vans = () => {
   const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get("type");
 
   useEffect(() => {
-    fetch("/api/vans")
+    fetch("/api/vans");
     const loadVans = async () => {
-        const data = await getVans()
-        setVans(data)
-    }
-    
-    loadVans()
-  }, []);
-    
-    const generateNewSearchParams = (key, value) => {
-        const sp = new URLSearchParams(searchParams)
-        if (value === null) {
-            sp.delete(key)
-        } else {
-            sp.set(key, value)
-        }
-        return `?${sp.toString()}`
-    }
+      setLoading(true);
+      try {
+        const data = await getVans();
+        setVans(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const handleFilterChange = (key, value) => {
-        setSearchParams(prevParams => {
-            if (value === null) {
-                prevParams.delete(key)
-            } else {
-                prevParams.set(key, value)
-            }
-            return prevParams
-        })
+    loadVans();
+  }, []);
+
+  const generateNewSearchParams = (key, value) => {
+    const sp = new URLSearchParams(searchParams);
+    if (value === null) {
+      sp.delete(key);
+    } else {
+      sp.set(key, value);
     }
+    return `?${sp.toString()}`;
+  };
+
+  const handleFilterChange = (key, value) => {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  };
 
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
@@ -46,7 +55,10 @@ const Vans = () => {
 
   const vanElements = filteredVans.map((van) => (
     <div key={van.id} className={styles.van_title}>
-      <Link to={van.id} state={{search: `?${searchParams.toString()}`, type: typeFilter}}>
+      <Link
+        to={van.id}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }}
+      >
         <img src={van.imageUrl} />
         <div className={styles.van_info}>
           <h3>{van.name}</h3>
@@ -61,6 +73,16 @@ const Vans = () => {
       </Link>
     </div>
   ));
+
+
+  if (loading) {
+    return <h1 aria-live="polite">Loading...</h1>
+}
+
+if (error) {
+    return <h1 aria-live="assertive">There was an error: {error.message}</h1>
+}
+
   return (
     <section className={styles.vans_contianer}>
       <h2>Explore our van options</h2>
@@ -77,7 +99,7 @@ const Vans = () => {
         <Link to="." className={styles.clear}>
           Clear filters
         </Link> */}
-              
+
         {/* Mergin search params with Link */}
         {/* <Link to={generateNewSearchParams("type", "simple")} className={`${styles.simple} ${styles.tag}`}>
           Simple
@@ -117,34 +139,44 @@ const Vans = () => {
         >
           Clear filters
         </button> */}
-              
+
         {/* Mering search params with setSearchParams function */}
         <button
           onClick={() => handleFilterChange("type", "simple")} //passing object as search parameters
-          className={`${styles.simple} ${styles.btn} ${typeFilter === 'simple' ? styles.selected : null}`}
+          className={`${styles.simple} ${styles.btn} ${
+            typeFilter === "simple" ? styles.selected : null
+          }`}
         >
           Simple
         </button>
         <button
           onClick={() => handleFilterChange("type", "luxury")} //passing string without "?" as search parameters
-          className={`${styles.luxury} ${styles.btn} ${typeFilter === 'luxury' ? styles.selected : null}`}
+          className={`${styles.luxury} ${styles.btn} ${
+            typeFilter === "luxury" ? styles.selected : null
+          }`}
         >
           Luxury
         </button>
         <button
           onClick={() => handleFilterChange("type", "rugged")} //passing string without "?" as search parameters
-          className={`${styles.rugged} ${styles.btn} ${typeFilter === 'rugged' ? styles.selected : null}`}
+          className={`${styles.rugged} ${styles.btn} ${
+            typeFilter === "rugged" ? styles.selected : null
+          }`}
         >
           Rugged
         </button>
-        {typeFilter && <button
-          onClick={() => handleFilterChange("type", null)}
-          className={styles.clear}
-        >
-          Clear filters
-        </button>}
+        {typeFilter && (
+          <button
+            onClick={() => handleFilterChange("type", null)}
+            className={styles.clear}
+          >
+            Clear filters
+          </button>
+        )}
       </div>
-      <div className={styles.van_list}>{vanElements}</div>
+      <div className={styles.van_list}>
+        {vanElements}
+      </div>
     </section>
   );
 };
