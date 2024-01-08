@@ -7,6 +7,7 @@ const VanDetail = () => {
   const params = useParams();
     const location = useLocation();
     const search = location.state?.search || ""
+    const type = location.state?.type || "all"
 
   const [van, setVan] = useState(null);
 
@@ -24,7 +25,7 @@ const VanDetail = () => {
               <Link
                   to={`..${search}`}
                 relative="path">
-          Back to all vans
+          Back to {type} vans
         </Link>
       </span>
       {van ? (

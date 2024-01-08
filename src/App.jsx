@@ -14,6 +14,7 @@ import HostVanDetails from "./pages/host/hostVanDetails/HostVanDetails";
 import HostVanInfo from "./pages/host/hostVanDetails/HostVanInfo";
 import HostVanPhotos from "./pages/host/hostVanDetails/HostVanPhotos";
 import HostVanPricing from "./pages/host/hostVanDetails/HostVanPricing";
+import NotFound from "./pages/notFoundPage/NotFound";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
 
           <Route path="vans" element={<Vans />} />
           <Route path="vans/:id" element={<VansDetail />} />
+
+          <Route path="*" element={<NotFound />} />
 
           {/* Nested Routing without using Layout route for shared element */}
           {/* <Route path="vans">
